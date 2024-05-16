@@ -20,6 +20,6 @@ This project operates under the assumption that I have been hired by Rockbuster 
 For analysis purposes, the Rockbuster relational database management system and PostgreSQL were utilized. The dataset encompasses information on Rockbuster's film inventory, customers, payments, stores, staff, films, actors, rental history, and addresses.
 
 # Visualizations
-Rockbuster Revenue and Customer by
-Country | Tableau Public
+Below is a link to an interactive visualization created using Tableau Public:
+[View my Tableau Public visualization](https://public.tableau.com/app/profile/juan.carlos.coronado.orrego/viz/RockbusterRevenueandCustomerbyCountry/Dashboard1?publish=yes)
 
