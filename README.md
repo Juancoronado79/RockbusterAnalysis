@@ -21,5 +21,6 @@ For analysis purposes, the Rockbuster relational database management system and 
 
 # Visualizations
 Below is a link to an interactive visualization created using Tableau Public:
+
 [View my Tableau Public visualization](https://public.tableau.com/app/profile/juan.carlos.coronado.orrego/viz/RockbusterRevenueandCustomerbyCountry/Dashboard1?publish=yes)
 
