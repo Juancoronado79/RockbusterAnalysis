@@ -1,12 +1,13 @@
 # This SQL code selects the five highest paying instacart customers who reside in the cities with the highest customer representation within the countries with the highest number of customers.
 
+-- Select customer details and total amount paid for top 5 paying customers in specific cities
 SELECT
     B.customer_id, 
     B.first_name,
     B.last_name,
     E.country,
     D.city,
-    SUM(A.amount) AS total_amount_paid
+    SUM(A.amount) AS total_amount_paid -- Total amount paid by each customer
 FROM
     payment A
     JOIN customer B ON A.customer_id = B.customer_id
@@ -15,6 +16,7 @@ FROM
     JOIN country E ON D.country_id = E.country_id
 WHERE 
     D.city IN (
+        -- Subquery to get top 10 cities within the top 10 countries by customer count
         SELECT
             D.city
         FROM
@@ -24,6 +26,7 @@ WHERE
             JOIN country E ON D.country_id = E.country_id
         WHERE
             E.country IN (
+                -- Subquery to get the top 10 countries by customer count
                 SELECT 
                     E.country
                 FROM 
@@ -34,17 +37,17 @@ WHERE
                 GROUP BY 
                     E.country
                 ORDER BY 
-                    COUNT(B.customer_id) DESC 
+                    COUNT(B.customer_id) DESC -- Order countries by number of customers in descending order
                 LIMIT 
-                    10
+                    10 -- Limit to top 10 countries
             )
         GROUP BY
             E.country,
             D.city
         ORDER BY
-            COUNT(B.customer_id) DESC
+            COUNT(B.customer_id) DESC -- Order cities by number of customers in descending order
         LIMIT
-            10
+            10 -- Limit to top 10 cities
     )
 GROUP BY
     B.customer_id, 
@@ -53,6 +56,6 @@ GROUP BY
     E.country,
     D.city
 ORDER BY
-    SUM(A.amount) DESC
+    SUM(A.amount) DESC -- Order by total amount paid in descending order
 LIMIT
-    5;
+    5; -- Limit to top 5 customers
