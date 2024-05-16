@@ -16,7 +16,10 @@ This project operates under the assumption that I have been hired by Rockbuster 
 
 ● Do sales figures vary between geographic regions?
 
-# tools 
-The data was analyzed using a relational database management system and PostgreSQL.
+# Data & tools 
+For analysis purposes, the Rockbuster relational database management system and PostgreSQL were utilized. The dataset encompasses information on Rockbuster's film inventory, customers, payments, stores, staff, films, actors, rental history, and addresses.
 
 # Visualizations
+Rockbuster Revenue and Customer by
+Country | Tableau Public
+
