@@ -1,0 +1,78 @@
+#This code retrieves the top 5 countries with the highest number of customers.
+#It also counts the total number of unique customers (all_customer_count) and the number of top 5 paying customers (top_customer_count) in each of these countries.
+#The results are ordered by the total customer count in descending order.
+
+
+-- Select the country, total customer count, and top customer count
+SELECT
+    E.country,
+    COUNT(DISTINCT B.customer_id) AS all_customer_count, -- Count of all unique customers in the country
+    COUNT(DISTINCT top_5_customers.customer_id) AS top_customer_count -- Count of top 5 paying customers in the country
+FROM
+    customer B
+    JOIN address C ON B.address_id = C.address_id
+    JOIN city D ON C.city_id = D.city_id
+    JOIN country E ON D.country_id = E.country_id
+    LEFT JOIN (
+        -- Subquery to get the top 5 customers by amount paid
+        SELECT
+            B.customer_id,
+            B.first_name,
+            B.last_name,
+            E.country,
+            D.city,
+            SUM(A.amount) AS total_amount_paid -- Total amount paid by each customer
+        FROM
+            payment A
+            JOIN customer B ON A.customer_id = B.customer_id
+            JOIN address C ON B.address_id = C.address_id
+            JOIN city D ON C.city_id = D.city_id
+            JOIN country E ON D.country_id = E.country_id
+        WHERE
+            D.city IN (
+                -- Subquery to get the top 10 cities within the top 10 countries by customer count
+                SELECT
+                    D.city
+                FROM
+                    customer B
+                    JOIN address C ON B.address_id = C.address_id
+                    JOIN city D ON C.city_id = D.city_id
+                    JOIN country E ON D.country_id = E.country_id
+                WHERE
+                    E.country IN (
+                        -- Subquery to get the top 10 countries by customer count
+                        SELECT
+                            E.country
+                        FROM
+                            customer B
+                            JOIN address C ON B.address_id = C.address_id
+                            JOIN city D ON C.city_id = D.city_id
+                            JOIN country E ON D.country_id = E.country_id
+                        GROUP BY
+                            E.country
+                        ORDER BY
+                            COUNT(B.customer_id) DESC
+                        LIMIT 10
+                    )
+                GROUP BY
+                    E.country,
+                    D.city
+                ORDER BY
+                    COUNT(B.customer_id) DESC
+                LIMIT 10
+            )
+        GROUP BY
+            B.customer_id,
+            B.first_name,
+            B.last_name,
+            E.country,
+            D.city
+        ORDER BY
+            SUM(A.amount) DESC
+        LIMIT 5
+    ) AS top_5_customers ON B.customer_id = top_5_customers.customer_id -- Join top 5 customers with main query
+GROUP BY
+    E.country
+ORDER BY
+    all_customer_count DESC -- Order by total customer count in descending order
+LIMIT 5; -- Limit the result to the top 5 countries
