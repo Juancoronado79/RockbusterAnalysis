@@ -1,5 +1,6 @@
 # RockbusterAnalysis
-I developed a presentation tailored for the business managers at Rockbuster Stealth. Additionally, I compiled an Excel file for my technical colleagues, which includes the SQL queries I authored along with their corresponding data outputs. Moreover, I prepared a comprehensive data dictionary.
+
+In delving into Rockbuster Stealth data, I will embark on an analytical journey to unravel key questions driving business strategy. My task will be to unveil the level of audience favorability towards movies, untangle crucial factors influencing rental operation, map customers geographically, pinpoint the locations of the most valuable customers, all while comparing sales across regions using SQL. In this journey towards data comprehension, I will seek not only answers but also perspectives that inspire informed strategic decisions.
 
 **Rockbuster Stealth LLC Data Analysis Project**
 
