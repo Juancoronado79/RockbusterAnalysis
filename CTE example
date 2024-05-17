@@ -16,7 +16,7 @@ FROM
     JOIN country E ON D.country_id = E.country_id
 WHERE 
     D.city IN (
-        -- Subquery to get top 10 cities within the top 10 countries by customer count
+        --  to get the top 10 cities within the top 10 countries by customer count
         SELECT
             D.city
         FROM
@@ -26,7 +26,7 @@ WHERE
             JOIN country E ON D.country_id = E.country_id
         WHERE
             E.country IN (
-                -- Subquery to get the top 10 countries by customer count
+                -- to get the top 10 countries by customer count
                 SELECT 
                     E.country
                 FROM 
